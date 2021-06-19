@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CertificateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('home', 'home')->middleware('auth');
+Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(function(){
+    Route::view('home', 'home');
+
+    Route::prefix('certificate')->name('certificate.')->group(function(){
+        Route::get('', [CertificateController::class, 'index'])->name('index');
+        Route::get('create', [CertificateController::class, 'create'])->name('create');
+        Route::post('store', [CertificateController::class, 'store'])->name('store');
+        Route::get('edit', [CertificateController::class, 'edit'])->name('edit');
+        Route::put('update', [CertificateController::class, 'update'])->name('update');
+        Route::delete('delete', [CertificateController::class, 'delete'])->name('delete');
+    });
+
+});
