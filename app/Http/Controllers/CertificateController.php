@@ -56,7 +56,7 @@ class CertificateController extends Controller
                 'file' => 'image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
-            $image_path = '/certificate_image/' . $certificate->file;
+            $image_path = public_path() . '/certificate_image/' . $certificate->file;
             if(File::exists($image_path)) {
                 File::delete($image_path);
             }
