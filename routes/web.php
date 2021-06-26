@@ -27,6 +27,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
         Route::post('store', [CertificateController::class, 'store'])->name('store');
         Route::get('{certificate_id}/edit', [CertificateController::class, 'edit'])->name('edit');
         Route::put('{certificate_id}/update', [CertificateController::class, 'update'])->name('update');
+        Route::get('{certificate_id}/configuration', [CertificateController::class, 'configuration'])->name('configuration');
+        Route::put('{certificate_id}/preview', [CertificateController::class, 'preview'])->name('preview');
         Route::delete('delete', [CertificateController::class, 'delete'])->name('delete');
     });
 

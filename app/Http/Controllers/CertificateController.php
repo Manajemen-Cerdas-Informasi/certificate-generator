@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -72,5 +73,27 @@ class CertificateController extends Controller
         ]);
 
         return redirect()->route('dashboard.certificate.index')->with('success', 'Certificate has updated successfully');
+    }
+
+    public function configuration($certificate_id)
+    {
+        $data['certificate'] = Certificate::find($certificate_id);
+        return view('dashboard.certificates.configuration', compact('data'));
+    }
+
+    public function preview($certificate_id, Request $request)
+    {
+        Certificate::find($certificate_id)->update([
+            'margin_name' => $request->margin_name,
+            'margin_desc' => $request->margin_desc,
+        ]);
+
+        $data['certificate'] = Certificate::find($certificate_id);
+        $html = view('dashboard.certificates.preview', compact('data'));
+        return $html;
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($html)->setPaper('a4', 'landscape');
+        return $pdf->stream();
     }
 }

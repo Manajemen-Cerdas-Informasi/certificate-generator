@@ -24,6 +24,7 @@
                                     <td>{{ $certificate->name }}</td>
                                     <td>
                                         <a href="{{ route('dashboard.certificate.edit', $certificate->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i></a>
+                                        <a href="{{ route('dashboard.certificate.configuration', $certificate->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
