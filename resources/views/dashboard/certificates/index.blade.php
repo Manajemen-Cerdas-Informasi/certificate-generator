@@ -22,7 +22,9 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $certificate->name }}</td>
-                                    <td></td>
+                                    <td>
+                                        <a href="{{ route('dashboard.certificate.edit', $certificate->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
